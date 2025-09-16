@@ -1,20 +1,22 @@
 services:
   - type: web
-    name: mysite
+    name: kin
     runtime: ruby
     plan: free
     buildCommand: './bin/render-build.sh'
-    # preDeployCommand: "bundle exec rails db:migrate" # preDeployCommand only available on paid instance types
-    startCommand: './bin/rails server'
+    startCommand: 'bin/rails db:migrate && bin/rails server -b 0.0.0.0 -p $PORT'
     envVars:
-      - key: postgresql://kin:lzD48qTxER1BtV97vuhkxebO6ihdfq4s@dpg-d34tb195pdvs73b946jg-a/event_db_ybe5
+      - key: DATABASE_URL
         fromDatabase:
-          name: mysite-db
+          name: event-app-db
           property: connectionString
-      - key: RAILS_MASTER_KEY
-        sync: false # You'll provide this value on Blueprint creation
+      - key: SECRET_KEY_BASE
+        value: d3221f2b110bc306be9c4b691c93f89eaf172df25be1e80df3b2d97b4b4d7a35a378615e063e7f13a892f40d17009f842b13096ed0bb013532fd4627680c93c3
+      - key: RAILS_ENV
+        value: production
       - key: WEB_CONCURRENCY
-        value: 2 # Recommended default
+        value: 2
+
 databases:
-  - name: mysite-db
+  - name: event-app-db
     plan: free
