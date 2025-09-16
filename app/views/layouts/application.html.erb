@@ -16,8 +16,8 @@
         <span>Welcome, <%= current_user.name %></span>
         <%= button_to "Logout", session_path, method: :delete, class: "btn-logout" %>
       <% else %>
-        <%= link_to "Login", new_session_path, class: "btn" %>
-        <%= link_to "Sign Up", new_user_path, class: "btn" %>
+        <span>EVENTS - Login or Sign Up</span>
+        
       <% end %>
     </nav>
 

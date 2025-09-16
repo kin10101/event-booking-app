@@ -2,57 +2,35 @@
 <p><strong>Date:</strong> <%= @event.date %></p>
 <p><strong>Location:</strong> <%= @event.location %></p>
 <p><strong>Description:</strong> <%= @event.description %></p>
-
-<%= link_to "Edit", edit_event_path(@event) %> |
-<%= button_to "Delete", @event, method: :delete, data: { confirm: "Are you sure?" } %> |
-<%= link_to "Back to Events", events_path %>
+<p><strong>Status:</strong> <%= @event.closed? ? "Closed" : "Open" %></p>
 
 <hr>
 
 <h2>Registrations</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @event.registrations.each do |reg| %>
-      <tr>
-        <td><%= reg.attendee_name %></td>
-        <td><%= reg.attendee_email %></td>
-        <td>
-          <%= link_to "Edit", edit_event_registration_path(@event, reg) %> |
-          <%= button_to "Delete", event_registration_path(@event, reg), method: :delete, data: { confirm: "Are you sure?" } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<ul>
+  <% @registrations.each do |reg| %>
+    <li>
+      <%= reg.attendee_name %> (<%= reg.attendee_email %>)
+      <% if !@event.closed? || current_user.admin? %>
+        | <%= link_to "Edit", edit_event_registration_path(@event, reg) %>
+        | <%= button_to "Delete", event_registration_path(@event, reg), method: :delete %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
 
-<h3>Add Registration</h3>
-<%= form_with(model: [@event, @registration]) do |form| %>
-  <% if @registration.errors.any? %>
-    <div class="errors">
-      <ul>
-        <% @registration.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
+
+<% unless @event.closed? %>
+  <h3>Register</h3>
+  <%= form_with model: [@event, @registration], local: true do |f| %>
+    <%= f.text_field :attendee_name, placeholder: "Your Name" %><br>
+    <%= f.email_field :attendee_email, placeholder: "Your Email" %><br>
+    <%= f.submit "Register" %>
   <% end %>
 
-  <p>
-    <%= form.label :attendee_name %><br>
-    <%= form.text_field :attendee_name %>
-  </p>
+<%= link_to "Back to Events", events_path %>
+<% else %>
+  <p><em>This event is closed. No new registrations allowed.</em></p>
+<%= link_to "Back to Events", events_path %>
 
-  <p>
-    <%= form.label :attendee_email %><br>
-    <%= form.email_field :attendee_email %>
-  </p>
-
-  <%= form.submit "Register" %>
 <% end %>
