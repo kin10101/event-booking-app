@@ -1,0 +1,146 @@
+/* Global Reset */
+body, h1, h2, h3, p, table, form, input, textarea {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
+  }
+  
+  /* Layout */
+  body {
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  .container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  
+  /* Navbar */
+  .navbar {
+    background: #2c3e50;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar .btn, .navbar .btn-logout {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .navbar .btn:hover, .navbar .btn-logout:hover {
+    background: #2980b9;
+  }
+  
+  /* Buttons */
+  .btn, .btn-logout, input[type="submit"] {
+    display: inline-block;
+    margin: 0.3rem 0;
+    padding: 0.5rem 1rem;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .btn:hover, .btn-logout:hover, input[type="submit"]:hover {
+    background: #2980b9;
+  }
+  
+  /* Forms */
+  form p {
+    margin: 0.7rem 0;
+  }
+  
+  input, textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  
+  table th, table td {
+    border: 1px solid #ddd;
+    padding: 0.6rem;
+  }
+  
+  table th {
+    background: #f0f0f0;
+    text-align: left;
+  }
+  
+  /* Flash Messages */
+  .flash.notice {
+    background: #d4edda;
+    color: #155724;
+    padding: 0.8rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+  
+  .flash.alert {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 0.8rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+  
+  /* Errors */
+  .errors {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 0.8rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+  
+
+  .stats {
+    background: #f0f4f8;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+  }
+  
+  .admin-nav {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .admin-nav .btn {
+    background: #2c3e50;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+  
+  .admin-nav .btn:hover {
+    background: #1a242f;
+  }
+  

@@ -1,0 +1,21 @@
+<h1>Edit Event (Admin)</h1>
+
+<%= form_with model: [:admin, @event], local: true do |form| %>
+  <% if @event.errors.any? %>
+    <div class="errors">
+      <ul>
+        <% @event.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p><%= form.label :name %><br><%= form.text_field :name %></p>
+  <p><%= form.label :date %><br><%= form.date_field :date %></p>
+  <p><%= form.label :location %><br><%= form.text_field :location %></p>
+  <p><%= form.label :description %><br><%= form.text_area :description %></p>
+
+  <%= form.submit "Update Event" %>
+  <%= link_to "Cancel", admin_events_path %>
+<% end %>

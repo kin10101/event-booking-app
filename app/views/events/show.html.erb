@@ -1,0 +1,58 @@
+<h1><%= @event.name %></h1>
+<p><strong>Date:</strong> <%= @event.date %></p>
+<p><strong>Location:</strong> <%= @event.location %></p>
+<p><strong>Description:</strong> <%= @event.description %></p>
+
+<%= link_to "Edit", edit_event_path(@event) %> |
+<%= button_to "Delete", @event, method: :delete, data: { confirm: "Are you sure?" } %> |
+<%= link_to "Back to Events", events_path %>
+
+<hr>
+
+<h2>Registrations</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @event.registrations.each do |reg| %>
+      <tr>
+        <td><%= reg.attendee_name %></td>
+        <td><%= reg.attendee_email %></td>
+        <td>
+          <%= link_to "Edit", edit_event_registration_path(@event, reg) %> |
+          <%= button_to "Delete", event_registration_path(@event, reg), method: :delete, data: { confirm: "Are you sure?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h3>Add Registration</h3>
+<%= form_with(model: [@event, @registration]) do |form| %>
+  <% if @registration.errors.any? %>
+    <div class="errors">
+      <ul>
+        <% @registration.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= form.label :attendee_name %><br>
+    <%= form.text_field :attendee_name %>
+  </p>
+
+  <p>
+    <%= form.label :attendee_email %><br>
+    <%= form.email_field :attendee_email %>
+  </p>
+
+  <%= form.submit "Register" %>
+<% end %>

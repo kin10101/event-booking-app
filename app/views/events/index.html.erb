@@ -1,0 +1,41 @@
+<h1>My Events</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Location</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.name %></td>
+        <td><%= event.date %></td>
+        <td><%= event.location %></td>
+        <td><%= event.closed? ? "Closed" : "Open" %></td>
+        <td>
+          <%= link_to "Show", event_path(event) %>
+
+          <% if current_user.admin? %>
+            | <%= link_to "Edit", edit_admin_event_path(event) %>
+            | <%= button_to "Delete", admin_event_path(event), method: :delete, data: { confirm: "Are you sure?" } %>
+            <% unless event.closed? %>
+              | <%= button_to "Close", close_admin_event_path(event), method: :patch, data: { confirm: "Close this event?" } %>
+            <% end %>
+          <% else %>
+            <% unless event.closed? %>
+              | <%= link_to "Edit", edit_event_path(event) %>
+              | <%= button_to "Delete", event_path(event), method: :delete, data: { confirm: "Are you sure?" } %>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New Event", new_event_path %>

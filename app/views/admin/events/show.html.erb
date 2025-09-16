@@ -1,0 +1,33 @@
+<h1>Event Details</h1>
+
+<p><strong>Name:</strong> <%= @event.name %></p>
+<p><strong>Date:</strong> <%= @event.date %></p>
+<p><strong>Location:</strong> <%= @event.location %></p>
+<p><strong>Description:</strong> <%= @event.description %></p>
+<p><strong>Created By:</strong> <%= @event.user.name %> (<%= @event.user.email_address %>)</p>
+<p><strong>Status:</strong> <%= @event.closed? ? "Closed" : "Open" %></p>
+
+<h2>Registrations</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Attendee</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @event.registrations.each do |registration| %>
+      <tr>
+        <td><%= registration.attendee_name %></td>
+        <td><%= registration.attendee_email %></td>
+        <td>
+          <%= link_to "Edit", edit_admin_registration_path(registration) %> |
+          <%= button_to "Delete", admin_registration_path(registration), method: :delete, data: { confirm: "Delete this registration?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Back to Events", admin_events_path %>

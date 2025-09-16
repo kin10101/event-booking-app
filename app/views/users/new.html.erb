@@ -1,0 +1,11 @@
+<h1>Sign Up</h1>
+
+<%= form_with model: @user do |form| %>
+  <%= form.text_field :name, placeholder: "Your Name", required: true %><br>
+  <%= form.email_field :email_address, placeholder: "Email", required: true %><br>
+  <%= form.password_field :password, placeholder: "Password", required: true %><br>
+  <%= form.password_field :password_confirmation, placeholder: "Confirm Password", required: true %><br>
+  <%= form.submit "Create Account" %>
+<% end %>
+
+<%= link_to "Back to Login", new_session_path %>

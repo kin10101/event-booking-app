@@ -1,0 +1,11 @@
+<h1>Admin Dashboard</h1>
+
+<p><strong>Total Events:</strong> <%= @total_events.to_i %></p>
+<p><strong>Total Registrations:</strong> <%= @total_registrations.to_i %></p>
+
+<hr>
+
+<nav class="admin-nav">
+  <%= link_to "Manage Events", admin_events_path, class: "btn" %>
+  <%= link_to "Manage Registrations", admin_registrations_path, class: "btn" %>
+</nav>

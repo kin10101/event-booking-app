@@ -1,0 +1,21 @@
+<h1>Edit Registration</h1>
+
+<%= form_with model: [:admin, @registration], local: true do |form| %>
+  <% if @registration.errors.any? %>
+    <div class="errors">
+      <ul>
+        <% @registration.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p><%= form.label :attendee_name %><br><%= form.text_field :attendee_name %></p>
+  <p><%= form.label :attendee_email %><br><%= form.email_field :attendee_email %></p>
+  <p><%= form.label :event_id, "Event" %><br>
+     <%= form.collection_select :event_id, Event.all, :id, :name %></p>
+
+  <%= form.submit "Update Registration" %>
+  <%= link_to "Cancel", admin_registrations_path %>
+<% end %>
